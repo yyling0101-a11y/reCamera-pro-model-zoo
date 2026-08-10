@@ -1,0 +1,15 @@
+{
+    // 1. 指定 clang-format 可执行文件的路径（就是刚才 which 命令得到的路径）
+    "clang-format.executable": "/usr/bin/clang-format",
+    // 2. 告诉 clang-format 使用项目中的 .clang-format 文件
+    "clang-format.style": "file",
+    // （可选）开启保存时自动格式化
+    "editor.formatOnSave": true,
+    // （可选）确保 C/C++ 插件的格式化引擎也指向 clang-format
+    "[cpp]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    },
+    "[c]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    }
+}

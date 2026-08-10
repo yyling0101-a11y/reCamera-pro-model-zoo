@@ -1,0 +1,7 @@
+/build/
+*.wav
+*.log
+
+# Local experimental projects
+/yolov5_benchmark/
+/yolov8n_pose/
