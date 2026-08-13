@@ -43,3 +43,25 @@ Across the 14 reported blocks that performed encoder inference:
 
 The stream therefore had substantial compute headroom relative to real time in this sample. The first block contained only FBank work because the 1,030 ms algorithmic window had not filled. Recognized utterances included `哈喽你好` and `能听得到吗`. Accuracy metrics such as WER/CER were not measured by this interactive log.
 
+## YOLO26n-Depth
+
+Command:
+
+```bash
+./recamera_depth_rtsp ./yolo26n-depth-rv1126b.rknn 8554 /recamera-depth
+```
+
+The model reported RGB UINT8/NHWC input `1x768x768x3` and FLOAT32/NCHW output `1x1x768x768`. The supplied log contains 93 frames (`0–92`); an RTSP client connected before frame 11. Frame 0 is retained as a cold-start observation rather than mixed silently into steady-state interpretation.
+
+| Metric | All observed frames | RTSP connected, frames 11–92 |
+| --- | ---: | ---: |
+| Preprocess | 32.55–35.26 ms | 32.55–35.26 ms |
+| NPU run | 239.07–263.17 ms | 239.07–252.48 ms |
+| RKNN output get | 5.79–8.14 ms | 5.79–8.00 ms |
+| Inference total | 277.94–304.92 ms | 277.94–291.82 ms |
+| Depth visualization postprocess | 110.24–116.84 ms | 110.24–116.84 ms |
+| End-to-end frame total | 392.60–419.93 ms | 392.60–408.50 ms |
+
+Once the client was connected, end-to-end throughput was approximately **2.45–2.55 FPS**, typically about **2.5 FPS**. This includes capture-to-app processing, letterbox preprocessing, NPU execution, output retrieval, percentile calculation, Turbo overlay, and submission to the RTSP pipeline. It does not isolate JPEG encoding or network/display latency at the viewer.
+
+The `depth_p02`/`depth_p98` values are per-frame visualization percentiles. Their observed variation must not be interpreted as metric distance because the model contract does not define a physical unit. No depth-accuracy dataset metric was measured in this run.

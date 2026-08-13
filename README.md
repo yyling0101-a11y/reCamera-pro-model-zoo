@@ -10,6 +10,7 @@ Native RKNN examples dedicated to **reCamera Pro (RV1126B, aarch64)**. Unlike th
 | --- | --- | --- | --- |
 | Speech recognition | [zipformer](examples/zipformer/README.md) | Streaming bilingual Chinese-English Zipformer | Ready |
 | Text to speech | [mms_tts](examples/mms_tts/README.md) | English MMS-TTS | Ready |
+| Monocular depth | [yolo26n_depth](examples/yolo26n_depth/README.md) | YOLO26n-Depth with embedded RTSP server | Ready |
 
 The existing `yolov5_benchmark` and `yolov8n_pose` directories are work in progress and are not part of this restructuring yet.
 
@@ -36,6 +37,7 @@ export RECAMERA_SYSROOT=/absolute/path/to/recamera-pro-sysroot
 export RECAMERA_RKNNRT="$RECAMERA_SYSROOT/usr/lib/librknnrt.so"
 ./build-linux.sh -d zipformer
 ./build-linux.sh -d mms_tts
+./build-linux.sh -d yolo26n_depth
 ```
 
 Model conversion, when needed, must use RKNN-Toolkit2 2.3.2 with `target_platform='rv1126b'`. The build embeds `/userdata/rknn_test/3rdparty/lib` as RUNPATH and never replaces the runtime already installed on the camera.
@@ -45,4 +47,3 @@ See [benchmark results](docs/benchmark.md).
 ## Upstream
 
 The organization follows [airockchip/rknn_model_zoo](https://github.com/airockchip/rknn_model_zoo), narrowed to RV1126B Linux only.
-

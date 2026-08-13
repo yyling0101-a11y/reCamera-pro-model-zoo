@@ -10,6 +10,7 @@
 | --- | --- | --- | --- |
 | 语音识别 | [zipformer](examples/zipformer/README_CN.md) | 流式中英双语 Zipformer | 可用 |
 | 语音合成 | [mms_tts](examples/mms_tts/README_CN.md) | 英文 MMS-TTS | 可用 |
+| 单目深度估计 | [yolo26n_depth](examples/yolo26n_depth/README_CN.md) | YOLO26n-Depth 与内嵌 RTSP 服务 | 可用 |
 
 现有 `yolov5_benchmark` 和 `yolov8n_pose` 尚在准备中，本次未纳入重构范围。
 
@@ -36,6 +37,7 @@ export RECAMERA_SYSROOT=/absolute/path/to/recamera-pro-sysroot
 export RECAMERA_RKNNRT="$RECAMERA_SYSROOT/usr/lib/librknnrt.so"
 ./build-linux.sh -d zipformer
 ./build-linux.sh -d mms_tts
+./build-linux.sh -d yolo26n_depth
 ```
 
 如需转换模型，必须使用 RKNN-Toolkit2 2.3.2，并设置 `target_platform='rv1126b'`。构建产物固定嵌入 `/userdata/rknn_test/3rdparty/lib` RUNPATH，不替换相机已有 Runtime。
